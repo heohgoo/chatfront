@@ -1,4 +1,4 @@
-function getMsg(msg) {
+function getSendMsgBox(msg) {
     return `<div class="sent_msg">
     <p>${msg}</p>
     <span class="time_date"> 11:18 | Today</span>
@@ -12,7 +12,7 @@ document.querySelector("#chat-send").addEventListener("click", () => {
 
     let chatOutgoingBox = document.createElement("div");
     chatOutgoingBox.className = "outgoing_msg";
-    chatOutgoingBox.innerHTML = getMsg(msgInput.value);
+    chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value);
     chatBox.append(chatOutgoingBox);
     msgInput.value = "";
 });
@@ -24,7 +24,7 @@ document.querySelector("#chat-outgoing-msg").addEventListener("keydown", (e) => 
     
         let chatOutgoingBox = document.createElement("div");
         chatOutgoingBox.className = "outgoing_msg";
-        chatOutgoingBox.innerHTML = getMsg(msgInput.value);
+        chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value);
         chatBox.append(chatOutgoingBox);
         msgInput.value = "";
     }
