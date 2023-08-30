@@ -14,7 +14,7 @@ eventSource.onmessage = (event) => {
     const parsed_time = parsed_year + '-' + parsed_month + '-' + parsed_day
         + ' | ' + parsed_hour + ':' + parsed_minute + ':' + parsed_second;
 
-    console.log(parsed_time);
+    
     initMessage(data, parsed_time);
 }
 
@@ -36,7 +36,8 @@ function initMessage(data, time) {
     msgInput.value = "";
 }
 
-function addMessage() {
+//통신으로 인해 비동기 함수 처리
+async function addMessage() {
     let chatBox = document.querySelector("#chat-box");
     let msgInput = document.querySelector("#chat-outgoing-msg");
 
@@ -55,6 +56,26 @@ function addMessage() {
 
     let now = year + '-' + month + '-' + day
         + ' | ' + hours + ':' + minutes + ':' + seconds;
+    
+    let chat = {
+        sender: "a",
+        receiver: "b",
+        msg: msgInput.value
+    };
+
+    let response = await fetch("http://localhost:8080/chat", {
+        method: "post",
+        body: JSON.stringify(chat),
+        headers: {
+            //MIME Type : 웹에서는 파일 확장자가 의미가 없으므로, 웹 상에서 전송하는 데이터 타입 정의
+            "Content-Type": "application/json; charset=utf-8"
+        }
+    });
+    // 통신이 끝날 때까지 기다려야 한다.
+
+    let parseResponse = await response.json();
+    
+    console.log(parseResponse);
 
     chatOutgoingBox.innerHTML = getSendMsgBox(msgInput.value, now);
     chatBox.append(chatOutgoingBox);
