@@ -27,7 +27,7 @@ color: #212529;
 }
 
 .chat_section{
-	padding-top: 15px;
+	padding-top: 0px;
 }
 .incoming_msg_img {
   display: inline-block;
