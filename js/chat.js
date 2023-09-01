@@ -2,6 +2,16 @@
 let username = prompt("아이디를 입력하세요");
 let roomNum = prompt("들어가려는 채팅방 번호를 입력하세요");
 
+let fileinput = document.querySelector("#fileinput");
+
+fileinput.addEventListener('change', (e) => {
+    let file = e.target.files[0];
+    console.log(file)
+
+    const selectfile = URL.createObjectURL(file);
+    document.querySelector("#user_profile").src = selectfile;
+})
+
 
 document.querySelector("#username").innerHTML = username;
 
@@ -45,7 +55,7 @@ eventSource.onmessage = (event) => {
 function getReceiveMsgBox(data) {
     return `<div class="received_withd_msg">
     <p style="margin-top:20px">${data.msg}</p>
-    <span class="time_date"> ${parse_time(data)} // ${data.sender} </span>
+    <span class="time_date"> ${parse_time(data)} // <b>${data.sender}</b> </span>
   </div>`;
 }
 
@@ -59,7 +69,7 @@ function getReceiveMsgBox(data) {
 function getSendMsgBox(data) {
     return `<div class="sent_msg">
     <p>${data.msg}</p>
-    <span class="time_date"> ${parse_time(data)} // ${data.sender} </span>
+    <span class="time_date"> ${parse_time(data)} // <b>${data.sender}</b></span>
   </div>`;
 }
 
